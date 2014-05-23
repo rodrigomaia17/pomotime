@@ -4,19 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Pomotime.Hubs;
 using Pomotime.Models;
 
 namespace Pomotime.Controllers
 {
     public class RoomController : Controller
     {
-        protected readonly IList<Room> Rooms;
-
-        public RoomController()
-        {
-            Rooms = new List<Room>();
-        }
-
         //
         // GET: /Room/2
         public ActionResult Room(Guid id)
@@ -30,6 +24,8 @@ namespace Pomotime.Controllers
             var room = new Room();
             room.PeopleList.Add(new Person(){ Name = "Guest"});
             
+            PomoHub.Rooms.Add(room);
+
             return RedirectToAction("Room", new RouteValueDictionary()
             {
               {"id",room.Id}

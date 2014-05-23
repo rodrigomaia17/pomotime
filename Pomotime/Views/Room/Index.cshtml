@@ -1,4 +1,27 @@
-﻿<link rel="stylesheet" href="@Url.Content("../../Scripts/flipclock/flipclock.css")">
+﻿@model Pomotime.Models.Room
+<link rel="stylesheet" href="@Url.Content("../../Scripts/flipclock/flipclock.css")">
+
+@section scripts
+{
+    <script src="@Url.Content("../../Scripts/flipclock/flipclock.min.js")"></script>
+
+    <script type="text/javascript">
+        var pomoClock;
+        $(function () {
+            pomoClock = $('#pomoclock').FlipClock({
+                countdown: true,
+                autoStart:false
+            });
+
+            pomoHub.client.StartPomo()
+
+        });
+
+        var startPomo = function() {
+            pomoHub.server.StartPomo(@Model.Id);
+        };
+    </script>
+}
 
 
 @{
@@ -7,17 +30,13 @@
 
 <h2>Index</h2>
 
-<div id="pomoclock"></div>
-<script src="@Url.Content("../../Scripts/flipclock/flipclock.min.js")"></script>
-@section scripts
-{
-    <script type="text/javascript">
-        $(function() {
-            $('#pomoclock').FlipClock({
-                // ... your options here
-            
-            });
-        });
-    </script>
-}
+<div class="row">
+    <div id="pomoclock"></div>
+</div>
+<div class="row">
+    <button class="btn btn-primary" onclick="startPomo"> Start</button>
+</div>
+
+
+
 
