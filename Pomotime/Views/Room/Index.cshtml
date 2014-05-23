@@ -1,0 +1,23 @@
+﻿<link rel="stylesheet" href="@Url.Content("../../Scripts/flipclock/flipclock.css")">
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="pomoclock"></div>
+<script src="@Url.Content("../../Scripts/flipclock/flipclock.min.js")"></script>
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $('#pomoclock').FlipClock({
+                // ... your options here
+            
+            });
+        });
+    </script>
+}
+
